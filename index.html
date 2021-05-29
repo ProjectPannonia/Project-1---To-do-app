@@ -9,6 +9,8 @@
 </head>
 <body>
     <div id="wrapper">
+
+        <!-- Sign in or register an account -->
         <div id="sign_log_in">
             <h2>My to-do application</h2>
             <form>
@@ -18,6 +20,8 @@
                 <input type="button" value="Sign up!">
             </form>
         </div>
+
+        <!-- Registerpage -->
         <div id="sign_up" class="hide">
             <h2>Sign up!</h2>
             <form id='sign_up_form'>
@@ -32,6 +36,8 @@
                 <input id="register_btn" type="button" value="Register">
             </form>
         </div>
+
+        <!-- Loginpage -->
         <div id="log_in" class="hide">
             <h2>Login</h2>
             <form id="login_form">
@@ -41,6 +47,32 @@
                 <input id="psw_log" type="password">
                 <input id="login_btn" type="button" value="Login"> 
             </form>
+        </div>
+
+        <!-- User logged in page -->
+        <div id="logged_in" class="hide">
+
+            <!-- Logged in main menu -->
+            <div class="top_menu">
+                <h2>Welcome <span></span></h2>
+                <form>
+                    <input type="button" value="Settings">
+                    <input type="button" value="Log out">
+                </form>
+            </div>
+            
+            <!-- To-do list -->
+            <div id="table_content" class="content">
+                Content comes here
+                <table>
+
+                </table>
+            </div>
+
+            <!-- Account settings page -->
+            <div id="account_settings" class="hide">
+
+            </div>
         </div>
 
     </div>

@@ -121,3 +121,21 @@
     background-color:burlywood;
     border-radius: 5px;
 }
+#logged_in {
+
+}
+.top_menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: yellow;
+    padding: 10px;
+}
+.top_menu h2 {
+    display: block;
+    margin:0px;
+}
+.content {
+    background-color: azure;
+    height: 75vh;
+}
