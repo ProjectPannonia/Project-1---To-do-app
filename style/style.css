@@ -49,3 +49,44 @@
     background-color: teal;
     color: white;
 }
+
+.main_box {
+    display: flex;
+    background-color: yellowgreen;
+    width: 80vw;
+    height: 80vh;
+    margin: 10px auto;
+    flex-direction: column;
+}
+.main_box h2 {
+    text-align: center;
+}
+#sign_up form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid aliceblue;
+    padding: 10px 50px;
+    margin: 10px auto;
+    font-size: 1.5em;
+}
+
+#sign_up form > input {
+    width: 500px;
+    height: 40px
+}
+#sign_up form > input {
+    width: 500px;
+    height: 40px
+}
+#sign_up form > * {
+    margin-bottom: 10px;
+}
+#sign_up form input:last-of-type {
+    margin-top: 30px;
+    width: 300px;
+    margin: 30px auto 0px auto;
+}
+.invalidData {
+    border: 1px solid red;
+    background-color: #e89f74;
+}
