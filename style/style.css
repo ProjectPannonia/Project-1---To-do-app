@@ -74,10 +74,6 @@
     width: 500px;
     height: 40px
 }
-#sign_up form > input {
-    width: 500px;
-    height: 40px
-}
 #sign_up form > * {
     margin-bottom: 10px;
 }
@@ -89,4 +85,39 @@
 .invalidData {
     border: 1px solid red;
     background-color: #e89f74;
+}
+#log_in {
+    margin-top: 20vh;
+    width: 300px;
+    height: 400px;
+}
+
+#log_in form {
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    margin-top: 0vh;
+}
+#log_in form input {
+    height: 5vh;
+    border-radius: 5%;
+    font-size: 1em;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#log_in form > *{
+    margin-bottom: 2vh;
+}
+#log_in form label {
+    font-size: 1.3em;
+    text-align: center;
+    background-color:burlywood;
+    border-radius: 5px;
+}
+#log_in form label {
+    font-size: 1.3em;
+    text-align: center;
+    background-color:burlywood;
+    border-radius: 5px;
 }

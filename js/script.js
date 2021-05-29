@@ -7,11 +7,9 @@ const loginAndSignupButtons = loginBox.querySelectorAll('input').forEach(item =>
 
         switch(buttonText) {
             case 'Log In':
-                console.log('Login pushed!');
                 mainButtonsHandler(buttonText);
                 break;
             case 'Sign up!':
-                console.log('Sign up pushed!');
                 mainButtonsHandler(buttonText);
                 break;
         }
@@ -24,6 +22,9 @@ const loginAndSignupButtons = loginBox.querySelectorAll('input').forEach(item =>
     };
 });
 
+/*
+    Functions for user registration
+*/
 class Account {
     constructor(firstName, lastName, email, password){
         this.firstName = firstName;
@@ -32,9 +33,7 @@ class Account {
         this.password = password;
     }
 }
-/*
 
-*/
 const registerForm = document.getElementById('sign_up_form');
 const fieldElements = registerForm.querySelectorAll('input');
 
@@ -60,10 +59,23 @@ const registerButton = document.getElementById('register_btn').addEventListener(
         if(emptyIndexes.length !== 0) {
             addRedBorder(emptyIndexes);
         } else {
-            console.log('Clear fields');
-            // clear fields
-            clearFields();
-            // create account object
+            
+            let inDb = localStorage.getItem(inputArr[2]);
+
+            if(inDb !== null) {
+                alert('This email is already registered');
+            } else {
+                // clear fields
+                clearFields();
+                // create account object
+                const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+                // send to local storage
+                localStorage.setItem(inputArr[0], newAccount);
+                document.getElementById('sign_up').classList.add('hide');
+                document.getElementById('sign_up').classList.remove('main_box');
+                document.getElementById('sign_log_in').classList.remove('hide');
+            }
+            
         }
 
         function addRedBorder(indexesArr) {
@@ -101,8 +113,19 @@ const registerButton = document.getElementById('register_btn').addEventListener(
     }
 });
 
+// Clear Sign up input fields 
 fieldElements.forEach(field => {
     field.addEventListener('change', () => {
         field.classList.remove('invalidData');
     })
+});
+
+/*
+    Function for login
+*/
+const loginButton = document.getElementById('login_btn').addEventListener('click', function(){
+    
+    
+
+
 });
