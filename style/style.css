@@ -1,0 +1,51 @@
+*{
+    box-sizing: border-box;
+}
+.hide {
+    display: none;
+}
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 98vw;
+    height: 100vh;
+    background-color: wheat;
+    margin:0px;
+}
+#sign_log_in {
+    margin: 25vh auto 25vh auto;
+    width: 30vw;
+    height: 40vh;
+    background-color: blanchedalmond;
+}
+#sign_log_in h2 {
+    text-align: center;
+    background-color:burlywood;
+}
+#sign_log_in form {
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    margin-top: 8vh;
+}
+#sign_log_in form > *{
+    margin-bottom: 2vh;
+}
+#sign_log_in form label {
+    font-size: 1.3em;
+    text-align: center;
+    background-color:burlywood;
+    border-radius: 5px;
+}
+#sign_log_in form input {
+    height: 5vh;
+    border-radius: 5%;
+    font-size: 1em;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#sign_log_in form input:hover {
+    background-color: teal;
+    color: white;
+}
