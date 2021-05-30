@@ -77,7 +77,7 @@ document.getElementById('register_btn').addEventListener('click', function(){
                 // create account object
                 const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
                 // send to local storage
-                localStorage.setItem(inputArr[0], JSON.stringify(newAccount));
+                localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
                 document.getElementById('sign_up').classList.add('hide');
                 document.getElementById('sign_up').classList.remove('main_box');
                 document.getElementById('sign_log_in').classList.remove('hide');
