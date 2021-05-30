@@ -54,7 +54,7 @@
 
             <!-- Logged in main menu -->
             <div class="top_menu">
-                <h2>Welcome <span></span></h2>
+                <h2>Welcome <span id='welcome_name'></span><span id='welcome_email' class='hide'></span></h2>
                 <form>
                     <input type="button" value="My list">
                     <input type="button" value="Settings">
@@ -63,16 +63,53 @@
             </div>
             
             <!-- To-do list -->
-            <div id="table_content" class="content">
-                Content comes here
-                <table>
+            <div class="main_content">
+                
+                <!-- My list div-->
+                <div id='my_list_div'>
+                    <div id='my_list_div_menu'>
+                        <form>
+                            <input type="button" value="Existing lists">
+                            <input type="button" value="Create new">
+                        </form>
+                    </div>
+                    <div id="existing_lists" class="my_list_box">
+                        <h2>Existing lists</h2>
+                        <ul>
+                            <li>test1</li>
+                            <li>test2</li>
+                        </ul>
+                    </div>
+                    <div id="create_new_list" class="hide">
+                        <h2>Create new To-Do list</h2>
+                        <form>
+                            <label id='new_list_name_label'>Name:</label>
+                            <input id="new_list_name" type="text">
+                            <input id="save_list_name" type="button" value="Save">
+                            <label id='activity_name_label' for="activity_name" class="hide">Activity name:</label>
+                            <input id='activity_name' type="text" class="hide">
+                            <input id="add_activity_btn" type="button" class="hide" value="Add">
+                        </form>
+                        <p></p>
+                        <table id='new_list_Table'>
+                            <thead>
+                                <tr>
+                                    <th>Activity</th>
+                                    <th>Timestamp</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <input id="save_created_list" type="button" value="Save">
+                    </div>
+                </div>
+                
+                <!-- Account settings page -->
+                <div id="account_settings" class="hide">
+                    Settings comes here
+                </div>
 
-                </table>
-            </div>
-
-            <!-- Account settings page -->
-            <div id="account_settings" class="hide">
-                Settings comes here
             </div>
         </div>
 

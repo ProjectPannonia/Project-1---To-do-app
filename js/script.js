@@ -1,6 +1,6 @@
 const loginBox = document.querySelector('#sign_log_in');
 
-const loginAndSignupButtons = loginBox.querySelectorAll('input').forEach(item => {
+loginBox.querySelectorAll('input').forEach(item => {
     item.addEventListener('click', event => {
         const target = event.target;
         const buttonText = target.value;
@@ -31,13 +31,20 @@ class Account {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.lists = []; // contain ToDoList objects
+    }
+}
+class ToDoList {
+    constructor(listName) {
+        this.listName = listName;
+        this.listElements = [];
     }
 }
 
 const registerForm = document.getElementById('sign_up_form');
 const fieldElements = registerForm.querySelectorAll('input');
 
-const registerButton = document.getElementById('register_btn').addEventListener('click', function(){
+document.getElementById('register_btn').addEventListener('click', function(){
     let inputArr = [];
     
     fieldElements.forEach(item => {
@@ -124,12 +131,11 @@ fieldElements.forEach(field => {
 /*
     Function for login
 */
-let registeredUser = "";
 
 const loginForm = document.getElementById('login_form');
 const loginFieldElements = loginForm.querySelectorAll('input');
 
-const loginButton = document.getElementById('login_btn').addEventListener('click', function(){
+document.getElementById('login_btn').addEventListener('click', function(){
     
     let inputArr = [];
     let email, psw;
@@ -159,16 +165,17 @@ function logMeIn(email, psw) {
     } else {
         const parsed = JSON.parse(emailDbResponse);
         if(psw === parsed.password) {
-            registeredUser = parsed.firstName + " " + parsed.lastName;
-            
-            redirectToLoggedIn();
+            let registeredUser = parsed.firstName + " " + parsed.lastName;
+            redirectToLoggedIn(registeredUser,email);
         }
     }
-    function redirectToLoggedIn() {
+    function redirectToLoggedIn(loggedInUser,email) {
         document.getElementById('log_in').classList.add('hide');
         document.getElementById('log_in').classList.remove('main_box');
         document.getElementById('logged_in').classList.remove('hide');
         document.getElementById('logged_in').classList.add('main_box');
+        document.getElementById('welcome_name').innerText = loggedInUser;
+        document.getElementById('welcome_email').innerText = email;
     }
 }
 
@@ -183,40 +190,27 @@ loginFieldElements.forEach(field => {
 /*
     Logged in handler
 */
+
+
 const topMenuDiv = document.querySelector('.top_menu');
 
-const topMenuButtonsHandler = topMenuDiv.querySelectorAll('input').forEach(item => {
+topMenuDiv.querySelectorAll('input').forEach(item => {
 
     item.addEventListener('click', event => {
         const target = event.target;
         const buttonText = target.value;
 
-        switch(buttonText) {
-            case 'Settings':
-                topButtonsHandler(buttonText);
-                break;
-            case 'Log out':
-                topButtonsHandler(buttonText);
-                break;
-            case 'My list':
-                topButtonsHandler(buttonText);
-                break;
-        }
+        topButtonsHandler(buttonText);
     });
 
     function topButtonsHandler(buttonText) {
-        if(buttonText === 'Settings') {
-            const tableContent = document.getElementById('table_content');
+        if(buttonText === 'Settings' || buttonText === 'My list') {
+            const tableContent = document.getElementById('my_list_div');
             const settingsDiv = document.getElementById('account_settings');
             
-          showAndHide(tableContent, settingsDiv);
+            showAndHide(tableContent, settingsDiv);
         } else if(buttonText === 'Log out'){
             
-        } else if(buttonText === 'My list') {
-            const tableContent = document.getElementById('table_content');
-            const settingsDiv = document.getElementById('account_settings');
-            
-          showAndHide(tableContent, settingsDiv);
         }
     }
     function showAndHide(...elements) {
@@ -228,3 +222,97 @@ const topMenuButtonsHandler = topMenuDiv.querySelectorAll('input').forEach(item 
         });
     }
 });
+function getLoggedInUserObj() {
+    let loggedInUser = document.getElementById('welcome_name').innerText;
+    let loggedInEmail = document.getElementById('welcome_email').innerText;
+
+    return userObject = JSON.parse(localStorage.getItem(loggedInEmail));
+}
+/*
+    Existing lists and create new buttons handlers
+*/
+const myListDivButtonsContainer = document.getElementById('my_list_div_menu');
+myListDivButtonsContainer.querySelectorAll('input').forEach(item => {
+    item.addEventListener('click', event => {
+        const target = event.target;
+        const btnText = target.value;
+
+        buttonsHandler(btnText);
+    });
+    function buttonsHandler(text) {
+        const existingLists = document.getElementById('existing_lists');
+        const createNew = document.getElementById('create_new_list');
+
+        if(text === 'Existing lists') {
+            existingLists.classList.add('my_list_box');
+            existingLists.classList.remove('hide');
+            createNew.classList.add('hide');
+        } else {
+            createNew.classList.add('my_list_box');
+            createNew.classList.remove('hide');
+            existingLists.classList.add('hide');
+        }
+    }
+});
+
+/*
+    Save new to-do list
+*/
+const saveListBtn = document.getElementById('save_list_name');
+const newListTable = document.getElementById('new_list_Table');
+const createNewListDiv = document.getElementById('create_new_list');
+
+const activitySaveBtn = document.getElementById('add_activity_btn');
+const activityNameLabel = document.getElementById('activity_name_label');
+const activityNameInput = document.getElementById('activity_name');
+
+saveListBtn.addEventListener('click', function(event){
+    const newListElement = document.getElementById('new_list_name');
+    const newListName = newListElement.value;
+    
+    if(newListName === '') {
+        alert('List name cannot be empty');
+    } else {
+        createNewListDiv.querySelector('p').innerText = newListName;
+        newListElement.value = '';
+        saveListBtn.classList.add('hide');
+        newListElement.classList.add('hide');
+        document.getElementById('new_list_name_label').classList.add('hide');
+        toggleActivityControls();
+    }
+
+    function toggleActivityControls() {
+        activityNameLabel.classList.toggle('hide');
+        activityNameInput.classList.toggle('hide');
+        activitySaveBtn.classList.toggle('hide');
+    }
+});
+
+const newTable = document.getElementById('new_list_Table');
+const newTableBody = newTable.querySelector('tbody');
+
+activitySaveBtn.addEventListener('click', () => {
+    const activityName = activityNameInput.value;
+    
+    const nameCol = document.createElement('td');
+    nameCol.innerText = activityName;
+
+    const timeCol = document.createElement('td');
+    timeCol.innerText = new Date();
+    const editCol = document.createElement('td');
+    const editBtn = createEditButton();
+    
+    const row = document.createElement('tr');
+    row.appendChild(nameCol);
+    row.appendChild(timeCol);
+    row.appendChild(editBtn);
+    newTableBody.appendChild(row);
+});
+function createEditButton() {
+    const button = document.createElement('input');
+    button.type = "button";
+    button.value = "Edit";
+    button.classList.add('edit_btn');
+    
+    return button;
+}
