@@ -247,10 +247,12 @@ myListDivButtonsContainer.querySelectorAll('input').forEach(item => {
             existingLists.classList.add('my_list_box');
             existingLists.classList.remove('hide');
             createNew.classList.add('hide');
+            createNew.classList.remove('my_list_box');
         } else {
             createNew.classList.add('my_list_box');
             createNew.classList.remove('hide');
             existingLists.classList.add('hide');
+            existingLists.classList.remove('my_list_box');
         }
     }
 });
@@ -313,6 +315,6 @@ function createEditButton() {
     button.type = "button";
     button.value = "Edit";
     button.classList.add('edit_btn');
-    
+
     return button;
 }
