@@ -183,14 +183,9 @@ loginFieldElements.forEach(field => {
 /*
     Logged in handler
 */
-const loggedInPage = document.getElementById('logged_in');
-const loggedHeader = loggedInPage.querySelector('h2');
-//console.log('Registered user: ' + registeredUser);
-//loggedHeader.querySelector('span').innerHTML = registeredUser;
-const topMenu = document.getElementsByClassName('top_menu');
-const topMenuButtons = topMenu.querySelectorAll('input');
+const topMenuDiv = document.querySelector('.top_menu');
 
-const topMenuButtonsHandler = topMenuButtons.querySelectorAll('input').forEach(item => {
+const topMenuButtonsHandler = topMenuDiv.querySelectorAll('input').forEach(item => {
 
     item.addEventListener('click', event => {
         const target = event.target;
@@ -203,6 +198,9 @@ const topMenuButtonsHandler = topMenuButtons.querySelectorAll('input').forEach(i
             case 'Log out':
                 topButtonsHandler(buttonText);
                 break;
+            case 'My list':
+                topButtonsHandler(buttonText);
+                break;
         }
     });
 
@@ -210,13 +208,23 @@ const topMenuButtonsHandler = topMenuButtons.querySelectorAll('input').forEach(i
         if(buttonText === 'Settings') {
             const tableContent = document.getElementById('table_content');
             const settingsDiv = document.getElementById('account_settings');
-
-            tableContent.classList.add('hide');
-            tableContent.classList.remove('content');
-            settingsDiv.classList.add('content');
-            settingsDiv.classList.remove('hide');
-        } else {
-
+            
+          showAndHide(tableContent, settingsDiv);
+        } else if(buttonText === 'Log out'){
+            
+        } else if(buttonText === 'My list') {
+            const tableContent = document.getElementById('table_content');
+            const settingsDiv = document.getElementById('account_settings');
+            
+          showAndHide(tableContent, settingsDiv);
         }
+    }
+    function showAndHide(...elements) {
+        console.log(elements);
+        elements.forEach(arg => {
+            console.log('switch');
+            arg.classList.toggle('hide');
+            arg.classList.toggle('content');
+        });
     }
 });
