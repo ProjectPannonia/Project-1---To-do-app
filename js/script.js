@@ -35,9 +35,15 @@ class Account {
     }
 }
 class ToDoList {
-    constructor(listName) {
+    constructor(listName,listElements) {
         this.listName = listName;
-        this.listElements = [];
+        this.listElements = listElements; // contains activity objects
+    }
+}
+class Activity {
+    constructor(activityName, timeStamp) {
+        this.activityName = activityName;
+        this.timeStamp = timeStamp;
     }
 }
 
@@ -273,7 +279,7 @@ myListDivButtonsContainer.querySelectorAll('input').forEach(item => {
 /*
     Save new to-do list
 */
-const saveListBtn = document.getElementById('save_list_name');
+const saveNewListName = document.getElementById('save_list_name');
 const newListTable = document.getElementById('new_list_Table');
 const createNewListDiv = document.getElementById('create_new_list');
 
@@ -281,7 +287,7 @@ const activitySaveBtn = document.getElementById('add_activity_btn');
 const activityNameLabel = document.getElementById('activity_name_label');
 const activityNameInput = document.getElementById('activity_name');
 
-saveListBtn.addEventListener('click', function(event){
+saveNewListName.addEventListener('click', function(event){
     const newListElement = document.getElementById('new_list_name');
     const newListName = newListElement.value;
     
@@ -290,7 +296,8 @@ saveListBtn.addEventListener('click', function(event){
     } else {
         createNewListDiv.querySelector('p').innerText = newListName;
         newListElement.value = '';
-        saveListBtn.classList.add('hide');
+        saveNewListName
+    .classList.add('hide');
         newListElement.classList.add('hide');
         document.getElementById('new_list_name_label').classList.add('hide');
         toggleActivityControls();
@@ -344,9 +351,14 @@ function createEditButton() {
     button.classList.add('edit_btn');
     button.addEventListener('click', event => {
         const target = event.target;
-        const firstParent = target.parentElement.nodeName;
-
-        console.log(firstParent.parentElement);
+        const targetParentNodes = target.parentElement.childNodes;
+        let prompt = window.prompt('Modify name to:');
+        if(prompt !== '') {
+            targetParentNodes[0].innerText = prompt;
+        } else {
+            alert('Cannot be null!');
+        }
+        
     });
     return button;
 }
@@ -359,3 +371,45 @@ document.querySelectorAll('.edit_btn').forEach(item => {
         console.log(event.target);
     });
 });
+
+/*
+    Save new list
+*/
+const saveNewListBtn = document.getElementById('save_created_list');
+saveNewListBtn.addEventListener('click', () => {
+    const table = document.getElementById('new_list_Table');
+    const tbody = table.querySelector('tbody');
+    const tableRows = tbody.childNodes;
+    const listName = document.getElementById('create_new_list').querySelector('p').innerText;
+
+    const activitiesObjectsArray = createActivities(tableRows);
+    // New list object created
+    const toDoList = new ToDoList(listName, activitiesObjectsArray);
+    // Get logged user email
+    const loggedEmail = document.getElementById('welcome_email').innerText;
+    // Get logged user data from local storage
+    const loggedUserData = localStorage.getItem(loggedEmail);
+    // Parse user data to an Account object
+    const loggedAccount = JSON.parse(loggedUserData);
+    console.log('Logged account firstName: ' + loggedAccount.firstName + ", lists length: " + loggedAccount.lists.length);
+    loggedAccount.lists.push(activitiesObjectsArray);
+    console.log('Logged account firstName: ' + loggedAccount.firstName + ", lists length: " + loggedAccount.lists.length);
+    console.log('Activites objc arr: ' + activitiesObjectsArray + ', created to-do: ' + toDoList + ', Logged email: ' + loggedEmail + ', Logged user data from local storage: ' + loggedUserData + ', Logged account: ' + loggedAccount);
+    // Save modified account to local storage
+    localStorage.setItem(loggedEmail, JSON.stringify(loggedAccount));
+});
+
+function createActivities(tbodyNode) {
+    let activityObjArr = [];
+
+    for(let i = 0; i < tbodyNode.length; i++) {
+        let row = tbodyNode[i];
+        let rowNodes = row.childNodes;
+        let activityName = rowNodes[0].innerText;
+        let timeStamp = rowNodes[1].innerText;
+        activityObjArr.push(new Activity(activityName, timeStamp));
+        console.log('NAme: ' + rowNodes[0].innerText + ", time: " + rowNodes[1].innerText);
+    }
+
+    return activityObjArr;
+}

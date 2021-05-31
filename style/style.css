@@ -139,7 +139,7 @@
     background-color: red;
 }
 #my_list_div_menu  input{
-    margin: 0px 5px 5px 5px;;
+    /*! margin: 0px 5px 5px 5px; */;
 }
 .my_list_box {
     display: flex;
@@ -168,6 +168,7 @@
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    align-items: center;
 }
 /*
 #create_new_list {
