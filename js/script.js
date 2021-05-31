@@ -47,11 +47,16 @@ const fieldElements = registerForm.querySelectorAll('input');
 document.getElementById('register_btn').addEventListener('click', function(){
     let inputArr = [];
     
+    for(let i = 0; i < fieldElements.length-2; i++) {
+        let val = fieldElements[i].value;
+        inputArr.push(val);
+    }
+    /*
     fieldElements.forEach(item => {
        let val = item.value;
        if(val !== 'Register') inputArr.push(val);
     });
-    
+    */
     validateValues(inputArr);
 
     function validateValues(arr) {
@@ -72,22 +77,29 @@ document.getElementById('register_btn').addEventListener('click', function(){
             if(inDb !== null) {
                 alert('This email is already registered');
             } else {
-                // clear fields
-                clearFields(fieldElements);
-                // create account object
-                const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
-                // send to local storage
-                localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
-                document.getElementById('sign_up').classList.add('hide');
-                document.getElementById('sign_up').classList.remove('main_box');
-                document.getElementById('sign_log_in').classList.remove('hide');
+                const checkbox = document.getElementById('aggreTerms').checked;
+                console.log('checkbox: ' + checkbox);
+                if(checkbox === true) {
+                    // clear fields
+                    clearFields(fieldElements);
+                    // create account object
+                    const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+                    // send to local storage
+                    localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+                    document.getElementById('sign_up').classList.add('hide');
+                    document.getElementById('sign_up').classList.remove('main_box');
+                    document.getElementById('sign_log_in').classList.remove('hide');
+                } else {
+                    alert('Please accept the therms!');
+                }
+                
             }
             
         }
 
         function addRedBorder(indexesArr) {
             indexesArr.forEach(index => {
-                const element = getElementByIndex(index);
+                let element = getElementByIndex(index);
                 element.classList.add('invalidData');
             });
         };
@@ -116,9 +128,10 @@ document.getElementById('register_btn').addEventListener('click', function(){
 });
 
 function clearFields(elementCollection) {
-    for(let i = 0; i < elementCollection.length-1; i++) {
+    for(let i = 0; i < elementCollection.length-2; i++) {
         fieldElements[i].value = '';
     }
+    document.getElementById('aggreTerms').checked = false;
 };
 
 // Clear Sign up input fields
@@ -293,28 +306,56 @@ saveListBtn.addEventListener('click', function(event){
 const newTable = document.getElementById('new_list_Table');
 const newTableBody = newTable.querySelector('tbody');
 
+let editBtns = document.querySelectorAll('.edit_btn');;
+
 activitySaveBtn.addEventListener('click', () => {
     const activityName = activityNameInput.value;
     
-    const nameCol = document.createElement('td');
-    nameCol.innerText = activityName;
+    if(activityName !== '') {
+        const nameCol = document.createElement('td');
+        nameCol.innerText = activityName;
 
-    const timeCol = document.createElement('td');
-    timeCol.innerText = new Date();
-    const editCol = document.createElement('td');
-    const editBtn = createEditButton();
-    
-    const row = document.createElement('tr');
-    row.appendChild(nameCol);
-    row.appendChild(timeCol);
-    row.appendChild(editBtn);
-    newTableBody.appendChild(row);
+        const timeCol = document.createElement('td');
+        timeCol.innerText = new Date();
+        const editCol = document.createElement('td');
+        const editBtn = createEditButton();
+        
+        const row = document.createElement('tr');
+
+        row.appendChild(nameCol);
+        row.appendChild(timeCol);
+        row.appendChild(editBtn);
+        newTableBody.appendChild(row);
+
+        activityNameInput.value = '';
+
+        //editBtns = document.querySelectorAll('.edit_btn');
+        
+    } else {
+        alert('Activity name is empty!');
+    }
 });
+
 function createEditButton() {
+    
     const button = document.createElement('input');
     button.type = "button";
     button.value = "Edit";
     button.classList.add('edit_btn');
+    button.addEventListener('click', event => {
+        const target = event.target;
+        const firstParent = target.parentElement.nodeName;
 
+        console.log(firstParent.parentElement);
+    });
     return button;
 }
+
+/*
+    Edit buttons
+*/
+document.querySelectorAll('.edit_btn').forEach(item => {
+    item.addEventListener('click', event => {
+        console.log(event.target);
+    });
+});
