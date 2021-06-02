@@ -47,33 +47,48 @@ class Activity {
     }
 }
 
+/*
+    New user registration functionality
+*/
 const registerForm = document.getElementById('sign_up_form');
 const fieldElements = registerForm.querySelectorAll('input');
 
-document.getElementById('register_btn').addEventListener('click', function(){
+const registerUserBtn = document.getElementById('register_btn');
+registerUserBtn.addEventListener('click', () => {
     let inputArr = [];
     
-    for(let i = 0; i < fieldElements.length-2; i++) {
-        let val = fieldElements[i].value;
-        inputArr.push(val);
-    }
-    /*
-    fieldElements.forEach(item => {
-       let val = item.value;
-       if(val !== 'Register') inputArr.push(val);
-    });
-    */
+    readValuesFromRegistrationForm(fieldElements);
     validateValues(inputArr);
+
+    /*
+        New user registration tagmethods
+    */
+    function readValuesFromRegistrationForm(fieldElements) {
+        fieldElements.forEach(element => {
+            inputArr.push(element.value);
+        });
+        /*
+        for(let i = 0; i < fieldElements.length-2; i++) {
+                let val = fieldElements[i].value;
+                inputArr.push(val);
+        }
+        */
+    }
 
     function validateValues(arr) {
         let emptyIndexes = [];
+        arr.forEach(element => {
+            if(element === '')
+                emptyIndexes.push(i);
+        });
+        /*
         for(let i = 0; i < arr.length; i++) {
             const element = arr[i];
             if(element === ''){
                 emptyIndexes.push(i);
             }
         }
-
+        */
         if(emptyIndexes.length !== 0) {
             addRedBorder(emptyIndexes);
         } else {
@@ -84,23 +99,30 @@ document.getElementById('register_btn').addEventListener('click', function(){
                 alert('This email is already registered');
             } else {
                 const checkbox = document.getElementById('aggreTerms').checked;
-                console.log('checkbox: ' + checkbox);
                 if(checkbox === true) {
                     // clear fields
                     clearFields(fieldElements);
                     // create account object
-                    const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+                    //const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
                     // send to local storage
-                    localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+                    //localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+                    
+
                     document.getElementById('sign_up').classList.add('hide');
                     document.getElementById('sign_up').classList.remove('main_box');
                     document.getElementById('sign_log_in').classList.remove('hide');
                 } else {
                     alert('Please accept the therms!');
                 }
-                
             }
             
+        }
+
+        function createAccountAnd() {
+            // create new account object
+            const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+            // send to local storage
+            localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
         }
 
         function addRedBorder(indexesArr) {
@@ -209,8 +231,6 @@ loginFieldElements.forEach(field => {
 /*
     Logged in handler
 */
-
-
 const topMenuDiv = document.querySelector('.top_menu');
 
 topMenuDiv.querySelectorAll('input').forEach(item => {
@@ -413,3 +433,39 @@ function createActivities(tbodyNode) {
 
     return activityObjArr;
 }
+/*
+    Load registered to-do lists from localstorage
+*/
+function loadSavedListsFromDb(userEmail) {
+    const registeredListsBox = document.getElementById('registered_list_box');
+    const userLists = getSavedLists(userEmail);
+    updateListBoxes(userLists,registeredListsBox);
+}
+/*
+    Get user data from localstorage
+*/
+function getSavedLists(userEmail) {
+    
+    const userAccount = JSON.parse(localStorage.getItem(userEmail));
+    //const userLists = userAccount.lists;
+    return userAccount.lists;
+}
+/*
+    Update list boxes
+*/
+function updateListBoxes(userLists, registeredListsContainer) {
+    const registeredBoxes = registeredListsContainer.querySelectorAll('list_box');
+    registeredBoxes.forEach(element => {
+        element.parentNode.removeChild(element);
+    });
+
+}
+/*
+    Create boxForList
+*/
+function createListBox() {
+    const listBoxElement = document.createElement('div');
+    listBoxElement.classList.add('list_box');
+}
+
+

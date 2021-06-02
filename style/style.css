@@ -9,18 +9,20 @@
     flex-direction: column;
     width: 98vw;
     height: 98vh;
-    background-color: wheat;
+    background: url('../pic/bg.jpg') no-repeat;
     margin: 0px auto;
 }
 #sign_log_in {
     margin: 25vh auto 25vh auto;
     width: 30vw;
     height: 40vh;
-    background-color: blanchedalmond;
+    background-color: rgba(250, 250, 35, 0.2);
+    border-radius: 8%;
+    color: white;
 }
 #sign_log_in h2 {
     text-align: center;
-    background-color:burlywood;
+    background-color:rgba(250, 250, 35, 0.6);
 }
 #sign_log_in form {
     display: flex;
@@ -34,8 +36,8 @@
 #sign_log_in form label {
     font-size: 1.3em;
     text-align: center;
-    background-color:burlywood;
-    border-radius: 5px;
+    background-color:rgba(250, 250, 35, 0.6);
+    border-radius: 35%;
 }
 #sign_log_in form input {
     height: 5vh;
@@ -44,36 +46,50 @@
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+    background-color: initial;
+    color: white;
+    font-size: 1.2em;
 }
 #sign_log_in form input:hover {
-    background-color: teal;
+    background-color: rgba(250, 250, 35, 0.3);
     color: white;
 }
 
 .main_box {
     display: flex;
-    background-color: blanchedalmond;
-    margin: 1vh auto;
+    margin: 15vh auto;
     flex-direction: column;
-    height: 96vh;
-    width: 76vw;
+    height: 65vh;
+    width: 35vw;
+    /*! border-radius: 4%; */
+    background-color: rgba(250, 250, 35, 0.3);
+    color: white;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 4%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 4%;
 }
 .main_box h2 {
     text-align: center;
-    background: burlywood;
+    background: rgba(250, 250, 35, 0.6);
 }
 #sign_up form {
     display: flex;
     flex-direction: column;
-    border: 1px solid aliceblue;
+    border: 4px solid darkseagreen;
     padding: 10px 50px;
     margin: 10px auto;
     font-size: 1.5em;
+    border-radius: 8%;
 }
 
 #sign_up form > input {
-    width: 500px;
-    height: 40px
+    width: 25vw;
+    height: 4vh;
+    border-radius: 20%;
+    font-size: 1em;
+    color: white;
+    background-color: rgba(250, 250, 35, 0.7);
 }
 #sign_up form > * {
     margin-bottom: 10px;
@@ -106,6 +122,9 @@
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgba(250, 250, 35, 0.7);
+    border-radius: 30%;
+    color: white;
 }
 #log_in form > *{
     margin-bottom: 2vh;
@@ -119,7 +138,7 @@
 #log_in form label {
     font-size: 1.3em;
     text-align: center;
-    background-color:burlywood;
+    background-color:rgba(250, 250, 35, 0.7);
     border-radius: 5px;
 }
 
@@ -127,16 +146,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: yellow;
+    background-color: rgba(250, 250, 35, 0.6);
     padding: 10px;
 }
 .top_menu h2 {
     display: block;
     margin:0px;
+    border-radius: 2%;
 }
 .main_content {
     height: 86vh;
-    background-color: red;
+    background-color: rgba(250, 250, 35, 0.2);
 }
 #my_list_div_menu  input{
     /*! margin: 0px 5px 5px 5px; */;
@@ -145,13 +165,13 @@
     display: flex;
     flex-direction: column;
     height: 84vh;
-    background-color: #e89f74;
+    background-color: rgba(250, 250, 35, 0.2);
 }
 .my_list_box h2 {
     margin: 0;
 }
 .my_list_box ul li {
-    width: 72vw;
+    width: 50vw;
 }
 #existing_lists ul {
     list-style: none;
@@ -179,16 +199,19 @@
 #new_list_Table {
     margin-top: 10px;
     align-self: center;
-    width: 74vw;
-    background-color: blanchedalmond;
+    width: 69vw;
     min-height: 60vh;
     max-height: 60vh;
-    /*! overflow: scroll; */
+    overflow: scroll;
     display: block;
-    overflow: scroll hidden;
+    /*! overflow: scroll hidden; */
+    background-color: rgba(250, 255, 205, 0.4);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 #new_list_Table thead {
-    background-color: green;
+    background-color: rgb(197, 228, 142);
+    height: 4vh;
 }
 #new_list_Table td{
     text-align: center;
@@ -218,13 +241,34 @@
     margin-top: 10px;
 }
 #new_list_Table th:first-child {
-    width: 30vw;
+    width: 26vw;
 }
 #new_list_Table th:nth-child(2) {
     
-    width: 30vw;
+    width: 28vw;
 }
 #new_list_Table th:nth-child(3) {
     
-    width: 19vw;
+    width: 15vw;
+}
+#logged_in {
+    width: 70vw;
+    margin-top: 3vh;
+    height: auto;
+}
+#registered_list_box {
+    
+    background: red;
+    width: 70vw;
+    height: 80vh;
+    background-color: rgba(250, 250, 35, 0);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.list_box {
+    width: 10vw;
+    height: 10vh;
+    background-color: blueviolet;
+    
 }
