@@ -31,7 +31,7 @@ class Account {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.lists = []; // contain ToDoList objects
+        this.lists = []; // contains ToDoList objects
     }
 }
 class ToDoList {
@@ -103,9 +103,9 @@ registerUserBtn.addEventListener('click', () => {
                     // clear fields
                     clearFields(fieldElements);
                     // create account object
-                    //const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+                    const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
                     // send to local storage
-                    //localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+                    localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
                     
 
                     document.getElementById('sign_up').classList.add('hide');
@@ -393,7 +393,7 @@ document.querySelectorAll('.edit_btn').forEach(item => {
 });
 
 /*
-    Save new list
+    Save new list and send to local storage
 */
 const saveNewListBtn = document.getElementById('save_created_list');
 saveNewListBtn.addEventListener('click', () => {
@@ -436,20 +436,20 @@ function createActivities(tbodyNode) {
 /*
     Load registered to-do lists from localstorage
 */
+const registeredListsBox = document.getElementById('registered_list_box');
 function loadSavedListsFromDb(userEmail) {
-    const registeredListsBox = document.getElementById('registered_list_box');
-    const userLists = getSavedLists(userEmail);
-    updateListBoxes(userLists,registeredListsBox);
-}
-/*
-    Get user data from localstorage
-*/
-function getSavedLists(userEmail) {
     
-    const userAccount = JSON.parse(localStorage.getItem(userEmail));
-    //const userLists = userAccount.lists;
-    return userAccount.lists;
+    // Registered to-do list of logged user
+    const account = JSON.parse(localStorage.getItem(userEmail));
+
+    
+    const fn = account.firstName;
+    const userLists = account.lists[0];
+    const flist = userLists[0];
+    console.log('First name: ' + flist.listName);
+    //updateListBoxes(userLists,registeredListsBox);
 }
+
 /*
     Update list boxes
 */
@@ -458,14 +458,60 @@ function updateListBoxes(userLists, registeredListsContainer) {
     registeredBoxes.forEach(element => {
         element.parentNode.removeChild(element);
     });
+    
+    let userListCounter = 0;
+    userLists.forEach(element => {
+        const elementFirstArr = element[0];
+        //const firstObj = elementFirstArr[0];
+        console.log('List: ' + String(elementFirstArr));
 
+        userListCounter++;
+    });
+    
 }
 /*
     Create boxForList
 */
-function createListBox() {
+function createListBox(listName, listElements) {
     const listBoxElement = document.createElement('div');
     listBoxElement.classList.add('list_box');
+    
+    const listBoxH2 = document.createElement('h2');
+    listBoxH2.innerText = listName;
+    listBoxElement.appendChild(listBoxH2);
+    listBoxElement.appendChild(createTableForList(listElements));
+
+}
+let createTableForList = (listElements) => {
+    const table = document.createElement('table');
+    const tableHeader = document.createElement('thead');
+    const NameHeader = document.createElement('th');
+    const timestampHeader = document.createElement('th');
+    const editHeader = document.createElement('th');
+
+    tableHeader.appendChild(NameHeader,timestampHeader,editHeader);
+    table.appendChild(tableHeader);
+    const tableBody = document.createElement('tbody');
+    
+    listElements.forEach(element => {
+        const row = document.createElement('tr');
+        
+        const nameCol = document.createElement('td');
+        nameCol.innerText = element.activityName;
+        row.appendChild(nameCol);
+        
+        const timeStampCol = document.createElement('td');
+        timeStampCol.innerText = element.timeStamp;
+        row.appendChild(timeStampCol);
+
+        const editCol = document.createElement('td');
+        const editButton = document.createElement('input');
+        editButton.classList.add('edit_btn');
+        editCol.appendChild(editButton);
+        row.appendChild(editCol);
+
+        tableBody.appendChild(row);
+    });
 }
 
 

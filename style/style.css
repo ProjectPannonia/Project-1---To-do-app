@@ -81,6 +81,7 @@
     margin: 10px auto;
     font-size: 1.5em;
     border-radius: 8%;
+    width: 30vw;
 }
 
 #sign_up form > input {
@@ -90,14 +91,14 @@
     font-size: 1em;
     color: white;
     background-color: rgba(250, 250, 35, 0.7);
+    text-align: center;
 }
 #sign_up form > * {
     margin-bottom: 10px;
 }
 #sign_up form input:last-of-type {
-    margin-top: 30px;
-    width: 300px;
     margin: 30px auto 0px auto;
+    width: 15vw;
 }
 .invalidData {
     border: 1px solid red;
@@ -125,6 +126,7 @@
     background-color: rgba(250, 250, 35, 0.7);
     border-radius: 30%;
     color: white;
+    text-align: center;
 }
 #log_in form > *{
     margin-bottom: 2vh;
