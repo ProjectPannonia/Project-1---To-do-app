@@ -22,7 +22,7 @@ class Activity {
 }
 
 /*
-    Main page - Login and sign up handler
+    Main page -- LOGIN AND SIGN UP --
 */
 const loginBox = document.querySelector('#sign_log_in');
 
@@ -63,9 +63,6 @@ registerUserBtn.addEventListener('click', () => {
     readValuesFromRegistrationForm(fieldElements);
     validateValues(inputArr);
 
-    /*
-        New user registration tagmethods
-    */
     function readValuesFromRegistrationForm(fieldElements) {
         fieldElements.forEach(element => {
             inputArr.push(element.value);
@@ -92,7 +89,6 @@ registerUserBtn.addEventListener('click', () => {
              // send to local storage
              localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
              
-
              document.getElementById('sign_up').classList.add('hide');
              document.getElementById('sign_up').classList.remove('main_box');
              document.getElementById('sign_log_in').classList.remove('hide');
@@ -120,7 +116,7 @@ registerUserBtn.addEventListener('click', () => {
                 case 2:
                     selectedElement = document.getElementById('email');
                     break;
-                case 3:
+                default:
                     selectedElement = document.getElementById('password');
                     break;
             }
@@ -129,7 +125,7 @@ registerUserBtn.addEventListener('click', () => {
         };
     }
 });
-
+/* Clear input fields */
 function clearFields(elementCollection) {
     for(let i = 0; i < elementCollection.length-2; i++) {
         fieldElements[i].value = '';
@@ -137,7 +133,7 @@ function clearFields(elementCollection) {
     document.getElementById('aggreTerms').checked = false;
 };
 
-// Clear Sign up input fields
+/* Clear Sign up input fields */
 fieldElements.forEach(field => {
     field.addEventListener('change', () => {
         field.classList.remove('invalidData');
@@ -145,9 +141,8 @@ fieldElements.forEach(field => {
 });
 
 /*
-    Function for login
+    LOGIN
 */
-
 const loginForm = document.getElementById('login_form');
 const loginFieldElements = loginForm.querySelectorAll('input');
 
