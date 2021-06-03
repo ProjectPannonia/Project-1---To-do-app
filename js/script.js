@@ -71,11 +71,7 @@ registerUserBtn.addEventListener('click', () => {
 
     function validateValues(arr) {
         let fieldIndex = 0;
-        let emptyIndexes = [];
-        arr.forEach(element => {
-            if(element === '') emptyIndexes.push(fieldIndex);
-            fieldIndex++;
-        });
+        let emptyIndexes = getEmptyInputFields(arr);
         
         if(emptyIndexes.length !== 0) {
             addRedBorder(emptyIndexes);
@@ -94,6 +90,15 @@ registerUserBtn.addEventListener('click', () => {
              document.getElementById('sign_log_in').classList.remove('hide');
         } else {
             alert('Please accept the therms!');
+        }
+
+        function getEmptyInputFields(arr) {
+            let emptyIndexes = [];
+            arr.forEach(element => {
+                if(element === '') emptyIndexes.push(fieldIndex);
+                fieldIndex++;
+            });
+            return emptyIndexes;
         }
 
         function addRedBorder(indexesArr) {
@@ -168,7 +173,7 @@ document.getElementById('login_btn').addEventListener('click', function(){
     
 });
 
-// Registered email? -> Then log me in
+/* If user registered ... */
 function logMeIn(email, psw) {
     const emailDbResponse = localStorage.getItem(email);
     if(emailDbResponse === null) {
@@ -267,36 +272,41 @@ myListDivButtonsContainer.querySelectorAll('input').forEach(item => {
 });
 
 /*
-    Save new to-do list
+    Create new TO-DO list
 */
-const saveNewListName = document.getElementById('save_list_name');
 const newListTable = document.getElementById('new_list_Table');
-const createNewListDiv = document.getElementById('create_new_list');
+
 
 const activitySaveBtn = document.getElementById('add_activity_btn');
 const activityNameLabel = document.getElementById('activity_name_label');
 const activityNameInput = document.getElementById('activity_name');
+const deadlineLabel = document.getElementById('datepicker_label');
+const deadlineInput = document.getElementById('datepicker');
 
-saveNewListName.addEventListener('click', function(event){
-    const newListElement = document.getElementById('new_list_name');
-    const newListName = newListElement.value;
-    
-    if(newListName === '') {
+/* New list -> Add name to the list */
+document.getElementById('save_list_name').addEventListener('click', () => {
+    const listnameInputField = document.getElementById('new_list_name');
+    const listName = listnameInputField.value;
+
+    if(listName === '') {
         alert('List name cannot be empty');
     } else {
-        createNewListDiv.querySelector('p').innerText = newListName;
-        newListElement.value = '';
-        saveNewListName
-    .classList.add('hide');
-        newListElement.classList.add('hide');
-        document.getElementById('new_list_name_label').classList.add('hide');
+        document.getElementById('create_new_list').querySelector('p').innerText = listName;
+        listnameInputField.innerText = '';
+        
+        listnameInputField.classList.add('hide');
+        
         toggleActivityControls();
     }
 
     function toggleActivityControls() {
+        document.getElementById('save_list_name').classList.toggle('hide');
+        document.getElementById('new_list_name_label').classList.toggle('hide');
         activityNameLabel.classList.toggle('hide');
         activityNameInput.classList.toggle('hide');
         activitySaveBtn.classList.toggle('hide');
+        deadlineLabel.classList.toggle('hide');
+        deadlineInput.classList.toggle('hide');
     }
 });
 
@@ -307,66 +317,75 @@ let editBtns = document.querySelectorAll('.edit_btn');;
 
 activitySaveBtn.addEventListener('click', () => {
     const activityName = activityNameInput.value;
+    const deadLineInput = document.getElementById('datepicker');
+    const deadLineTime = deadLineInput.value;
     
-    if(activityName !== '') {
-        const nameCol = document.createElement('td');
-        nameCol.innerText = activityName;
+    if(activityName !== '' && deadLineTime !== '') {
+        const nameCol = getEmptyColumn(activityName);
 
-        const timeCol = document.createElement('td');
-        timeCol.innerText = new Date();
-        const editCol = document.createElement('td');
+        const specDate = getDate();
+        const timeCol = getEmptyColumn(specDate);
+        
+        const deadlineCol = getEmptyColumn(deadLineTime);
         const editBtn = createEditButton();
         
-        const row = document.createElement('tr');
-
-        row.appendChild(nameCol);
-        row.appendChild(timeCol);
-        row.appendChild(editBtn);
+        const row = createRow(nameCol, timeCol,deadlineCol,editBtn);
         newTableBody.appendChild(row);
 
-        activityNameInput.value = '';
-
-        //editBtns = document.querySelectorAll('.edit_btn');
+        clearInputFields();
         
     } else {
         alert('Activity name is empty!');
     }
-});
+    function getEmptyColumn(innerText) {
+        let col = document.createElement('td');
+        col.innerText = innerText;
 
-function createEditButton() {
+        return col;
+    }
+    function createRow(nameCol, timeCol, deadLineCol, editBtn) {
+        let row = document.createElement('tr');
+        row.appendChild(nameCol);
+        row.appendChild(timeCol);
+        row.appendChild(deadLineCol);
+        row.appendChild(editBtn);
+        return row;
+    }
+    function createEditButton() {
     
-    const button = document.createElement('input');
-    button.type = "button";
-    button.value = "Edit";
-    button.classList.add('edit_btn');
-    button.addEventListener('click', event => {
-        const target = event.target;
-        const targetParentNodes = target.parentElement.childNodes;
-        let prompt = window.prompt('Modify name to:');
-        if(prompt !== '') {
-            targetParentNodes[0].innerText = prompt;
-        } else {
-            alert('Cannot be null!');
-        }
-        
-    });
-    return button;
-}
-
-/*
-    Edit buttons
-*/
-document.querySelectorAll('.edit_btn').forEach(item => {
-    item.addEventListener('click', event => {
-        console.log(event.target);
-    });
+        const button = document.createElement('input');
+        button.type = "button";
+        button.value = "Edit";
+        button.classList.add('edit_btn');
+        button.addEventListener('click', event => {
+            const target = event.target;
+            const targetParentNodes = target.parentElement.childNodes;
+            let prompt = window.prompt('Modify name to:');
+            if(prompt !== '') {
+                targetParentNodes[0].innerText = prompt;
+            } else {
+                alert('Cannot be null!');
+            }
+            
+        });
+        return button;
+    }
+    function clearInputFields() {
+        activityNameInput.value = '';
+        deadLineInput.value = '';
+    }
+    function getDate() {
+        let fullDate = new Date();
+       
+        return fullDate.getUTCDay() + "/" + fullDate.getUTCMonth() + "/" + fullDate.getUTCFullYear();
+    }
 });
 
 /*
     Save new list and send to local storage
 */
-const saveNewListBtn = document.getElementById('save_created_list');
-saveNewListBtn.addEventListener('click', () => {
+
+document.getElementById('save_created_list').addEventListener('click', () => {
     const table = document.getElementById('new_list_Table');
     const tbody = table.querySelector('tbody');
     const tableRows = tbody.childNodes;
@@ -397,7 +416,9 @@ function createActivities(tbodyNode) {
         let rowNodes = row.childNodes;
         let activityName = rowNodes[0].innerText;
         let timeStamp = rowNodes[1].innerText;
-        activityObjArr.push(new Activity(activityName, timeStamp));
+        let deadLine = rowNodes[2].innerText;
+
+        activityObjArr.push(new Activity(activityName, timeStamp, deadLine));
         console.log('NAme: ' + rowNodes[0].innerText + ", time: " + rowNodes[1].innerText);
     }
 
@@ -484,4 +505,7 @@ let createTableForList = (listElements) => {
     });
 }
 
-
+/* Date picker */
+$( function() {
+    $( "#datepicker" ).datepicker();
+});

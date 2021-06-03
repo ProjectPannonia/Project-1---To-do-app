@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <link rel="stylesheet" href="style/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -85,9 +89,13 @@
                             <label id='new_list_name_label'>Name:</label>
                             <input id="new_list_name" type="text">
                             <input id="save_list_name" type="button" value="Save">
+
                             <label id='activity_name_label' for="activity_name" class="hide">Activity name:</label>
                             <input id='activity_name' type="text" class="hide">
+                            <label id="datepicker_label" for="datepicker" class="hide">Deadline</label>
+                            <input id="datepicker" class="hide" type="text">
                             <input id="add_activity_btn" type="button" class="hide" value="Add">
+                            
                         </form>
                         <p>Unnamed to-do list</p>
                         <table id='new_list_Table'>
@@ -119,5 +127,6 @@
     </div>
 
     <script type="text/javascript" src="js/script.js"></script>
+    
 </body>
 </html>
