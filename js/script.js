@@ -41,9 +41,10 @@ class ToDoList {
     }
 }
 class Activity {
-    constructor(activityName, timeStamp) {
+    constructor(activityName, timeStamp,deadline) {
         this.activityName = activityName;
         this.timeStamp = timeStamp;
+        this.deadline = deadline;
     }
 }
 
@@ -52,8 +53,8 @@ class Activity {
 */
 const registerForm = document.getElementById('sign_up_form');
 const fieldElements = registerForm.querySelectorAll('input');
-
 const registerUserBtn = document.getElementById('register_btn');
+
 registerUserBtn.addEventListener('click', () => {
     let inputArr = [];
     

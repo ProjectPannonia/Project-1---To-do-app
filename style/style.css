@@ -243,15 +243,19 @@
     margin-top: 10px;
 }
 #new_list_Table th:first-child {
-    width: 26vw;
+    width: 20vw;
 }
 #new_list_Table th:nth-child(2) {
     
-    width: 28vw;
+    width: 20vw;
 }
 #new_list_Table th:nth-child(3) {
     
-    width: 15vw;
+    width: 20vw;
+}
+#new_list_Table th:nth-child(4) {
+    
+    width: 9vw;
 }
 #logged_in {
     width: 70vw;
