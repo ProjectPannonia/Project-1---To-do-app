@@ -1,30 +1,3 @@
-const loginBox = document.querySelector('#sign_log_in');
-
-loginBox.querySelectorAll('input').forEach(item => {
-    item.addEventListener('click', event => {
-        const target = event.target;
-        const buttonText = target.value;
-
-        switch(buttonText) {
-            case 'Log In':
-                mainButtonsHandler(buttonText);
-                break;
-            case 'Sign up!':
-                mainButtonsHandler(buttonText);
-                break;
-        }
-    });
-    let mainButtonsHandler = (buttonText) => {
-        const selectedOption = (buttonText === 'Log In') ?  document.getElementById('log_in') : document.getElementById('sign_up');
-        selectedOption.classList.remove('hide');
-        selectedOption.classList.add('main_box');
-        loginBox.classList.add('hide');
-    };
-});
-
-/*
-    Functions for user registration
-*/
 class Account {
     constructor(firstName, lastName, email, password){
         this.firstName = firstName;
@@ -49,6 +22,35 @@ class Activity {
 }
 
 /*
+    Main page - Login and sign up handler
+*/
+const loginBox = document.querySelector('#sign_log_in');
+
+loginBox.querySelectorAll('input').forEach(item => {
+    item.addEventListener('click', event => {
+        const target = event.target;
+        const buttonText = target.value;
+
+        switch(buttonText) {
+            case 'Log In':
+                mainButtonsHandler(buttonText);
+                break;
+            case 'Sign up!':
+                mainButtonsHandler(buttonText);
+                break;
+        }
+    });
+    let mainButtonsHandler = (buttonText) => {
+        const selectedOption = (buttonText === 'Log In') ?  document.getElementById('log_in') : document.getElementById('sign_up');
+        selectedOption.classList.remove('hide');
+        selectedOption.classList.add('main_box');
+        loginBox.classList.add('hide');
+    };
+});
+
+
+
+/*
     New user registration functionality
 */
 const registerForm = document.getElementById('sign_up_form');
@@ -68,62 +70,34 @@ registerUserBtn.addEventListener('click', () => {
         fieldElements.forEach(element => {
             inputArr.push(element.value);
         });
-        /*
-        for(let i = 0; i < fieldElements.length-2; i++) {
-                let val = fieldElements[i].value;
-                inputArr.push(val);
-        }
-        */
     }
 
     function validateValues(arr) {
+        let fieldIndex = 0;
         let emptyIndexes = [];
         arr.forEach(element => {
-            if(element === '')
-                emptyIndexes.push(i);
+            if(element === '') emptyIndexes.push(fieldIndex);
+            fieldIndex++;
         });
-        /*
-        for(let i = 0; i < arr.length; i++) {
-            const element = arr[i];
-            if(element === ''){
-                emptyIndexes.push(i);
-            }
-        }
-        */
+        
         if(emptyIndexes.length !== 0) {
             addRedBorder(emptyIndexes);
+        } else if(localStorage.getItem(inputArr[2]) !== null){
+            alert('This email is already registered');
+        } else if(document.getElementById('aggreTerms').checked){
+             // clear fields
+             clearFields(fieldElements);
+             // create account object
+             const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+             // send to local storage
+             localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+             
+
+             document.getElementById('sign_up').classList.add('hide');
+             document.getElementById('sign_up').classList.remove('main_box');
+             document.getElementById('sign_log_in').classList.remove('hide');
         } else {
-            
-            let inDb = localStorage.getItem(inputArr[2]);
-
-            if(inDb !== null) {
-                alert('This email is already registered');
-            } else {
-                const checkbox = document.getElementById('aggreTerms').checked;
-                if(checkbox === true) {
-                    // clear fields
-                    clearFields(fieldElements);
-                    // create account object
-                    const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
-                    // send to local storage
-                    localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
-                    
-
-                    document.getElementById('sign_up').classList.add('hide');
-                    document.getElementById('sign_up').classList.remove('main_box');
-                    document.getElementById('sign_log_in').classList.remove('hide');
-                } else {
-                    alert('Please accept the therms!');
-                }
-            }
-            
-        }
-
-        function createAccountAnd() {
-            // create new account object
-            const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
-            // send to local storage
-            localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+            alert('Please accept the therms!');
         }
 
         function addRedBorder(indexesArr) {
