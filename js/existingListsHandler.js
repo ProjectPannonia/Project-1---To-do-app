@@ -30,16 +30,20 @@ function updateRegisteredListBox(listsContainer,arrayOfToDos) {
         const listName = toDoObj.listName;
         const listBox = getEmptyBox(listName);
         listsContainer.appendChild(listBox);
+        
     });
 }
 function getEmptyBox(listName) {
     const header = getHeader(listName);
     const headerBox = document.createElement('div');
     const tableContainer = getTableContainer(listName);
+    const form = getForm();
     headerBox.classList.add('list_box');
 
     headerBox.appendChild(header);
     headerBox.appendChild(tableContainer);
+    headerBox.appendChild(form);
+    /* Add two buttons for -> add new activity and save modifications */
 
     return headerBox;
 }
@@ -50,10 +54,10 @@ function getHeader(listName) {
         
         const target = event.target;
         const parent = target.parentElement;
-        const parentParent = parent.parentElement;
         parent.querySelector('table').classList.toggle('hide');
         parent.querySelector('table').classList.toggle('tableContainer');
         parent.classList.toggle('active_list_box');
+        parent.querySelector('form').classList.toggle('hide');
         
     });
     return header;
@@ -86,7 +90,6 @@ function getTh(name) {
 function getTableBody(listName) {
     const accountObj = JSON.parse(localStorage.getItem(loggedEmail.innerText));
     const listObjects = accountObj.lists; // Account.lists
-    let toDoListObj;
     let filledTbody;
 
     listObjects.forEach(toDoObj => { // To do objects
@@ -147,4 +150,19 @@ function createEditButton() {
         
     });
     return button;
+}
+
+function getForm() {
+    const form = document.createElement('form');
+    form.classList.add('hide');
+    const addBtn = document.createElement('input');
+    addBtn.type = 'button';
+    addBtn.value = 'Add';
+    const saveBtn = document.createElement('input');
+    saveBtn.type = 'button';
+    saveBtn.value ='Save';
+    form.appendChild(addBtn);
+    form.appendChild(saveBtn);
+
+    return form;
 }
