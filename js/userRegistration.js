@@ -151,7 +151,6 @@ saveListName.addEventListener('click', () => {
 activitySaveBtn.addEventListener('click', () => {
     const newTable = document.getElementById('new_list_Table');
     const newTableBody = newTable.querySelector('tbody');
-    //let editBtns = document.querySelectorAll('.edit_btn');;
     const activityName = activityNameInput.value;
     const deadLineInput = document.getElementById('datepicker');
     const deadLineTime = deadLineInput.value;

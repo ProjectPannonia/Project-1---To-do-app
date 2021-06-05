@@ -287,3 +287,20 @@
     background-color: red;
     cursor: pointer;
 }
+.tableContainer {
+    width: 68vw;
+    height: 100px;
+    background-color: aqua;
+    margin-top: 1vh;
+}
+.tableContainer :first-child{
+    
+    background-color: red;
+    height: 2vh;
+}
+.tableContainer :first-child th {
+    height: 50px;
+}
+.active_list_box {
+    height: auto;
+}
