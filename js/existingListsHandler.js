@@ -53,11 +53,15 @@ function getHeader(listName) {
     header.addEventListener('click', (event) => {
         
         const target = event.target;
-        const parent = target.parentElement;
-        parent.querySelector('table').classList.toggle('hide');
-        parent.querySelector('table').classList.toggle('tableContainer');
-        parent.classList.toggle('active_list_box');
-        parent.querySelector('form').classList.toggle('hide');
+        const table = target.parentElement;
+        table.querySelector('table').classList.toggle('hide');
+        table.querySelector('table').classList.toggle('tableContainer');
+        table.classList.toggle('active_list_box');
+        
+        const formBtns = table.querySelectorAll('.form_btn');
+        formBtns.forEach(button => {
+            button.classList.toggle('hide');
+        })
         
     });
     return header;
@@ -154,15 +158,46 @@ function createEditButton() {
 
 function getForm() {
     const form = document.createElement('form');
-    form.classList.add('hide');
-    const addBtn = document.createElement('input');
-    addBtn.type = 'button';
-    addBtn.value = 'Add';
-    const saveBtn = document.createElement('input');
-    saveBtn.type = 'button';
-    saveBtn.value ='Save';
+    //form.classList.add('hide');
+    const addBtn = createFormButton('Add');
+    const saveBtn = createFormButton('Save');
+    
     form.appendChild(addBtn);
     form.appendChild(saveBtn);
 
     return form;
+}
+function createFormButton(value) {
+    const button = document.createElement('input');
+    button.type = 'button';
+    button.value = value;
+    button.classList.add('form_btn');
+    button.classList.add('hide');
+    button.addEventListener('click', (event) => {
+        getFormButtonFunction(value,event);
+    });
+    return button;
+}
+function getFormButtonFunction(value,event) {
+    let func;
+    const target = event.target;
+    const table = (((target.parentElement).parentElement).querySelector('table')).querySelector('tbody');
+
+    if(value === 'Add') {
+        func = () => {
+            const activityName = prompt('Activity name: ');
+            const fullDate = new Date();
+            const timestamp = fullDate.getUTCDay() + "/" + fullDate.getUTCMonth() + "/" + fullDate.getUTCFullYear();
+            const deadline = prompt('Enter deadline(day/month/year)','Undefined');
+            const row = getActivityRow(activityName,timestamp,deadline,createEditButton());
+            table.appendChild(row);
+            console.log(table.innerHTML);
+        }
+    } else {
+        func = () => {
+            
+        }
+    }
+
+    return func();
 }
