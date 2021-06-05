@@ -1,4 +1,4 @@
-
+/*
 class Account {
     constructor(firstName, lastName, email, password){
         this.firstName = firstName;
@@ -21,7 +21,7 @@ class Activity {
         this.deadline = deadline;
     }
 }
-
+*/
 /*
     Existing lists and create new buttons handlers
 */
@@ -64,11 +64,12 @@ function include(file) {
     script.defer = true;
     document.getElementsByTagName('body').item(0).appendChild(script);
 }
-//export {Account,ToDoList,Activity};
+//export {Account, ToDoList, Activity};
+
 include('js/loggedInController.js');
 include('js/loginHandler.js');
 include('js/loginAndSignupHandler.js');
 include('js/userRegistration.js');
 include('js/userLoginHandler.js');
-include('js/createNewListHandler.js');
+//include('js/createNewListHandler.js');
 include('js/existingListsHandler.js');

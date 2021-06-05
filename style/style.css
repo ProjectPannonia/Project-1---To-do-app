@@ -273,8 +273,17 @@
     flex-wrap: wrap;
 }
 .list_box {
-    width: 10vw;
-    height: 10vh;
+    width: 68vw;
+    height: 8vh;
     background-color: blueviolet;
-    
+    margin:1vh;
+}
+.list_box h2 {
+    font-size: 2em;
+    height: 8vh;
+    padding-top: 2vh;
+}
+.list_box:hover {
+    background-color: red;
+    cursor: pointer;
 }
