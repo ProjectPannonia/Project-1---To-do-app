@@ -8,6 +8,8 @@ const loggedEmail = document.getElementById('welcome_email');
 existingListsBtn.addEventListener('click', () => {
     loadSavedListsFromDb(loggedEmail.innerText);
 });
+
+
 function loadSavedListsFromDb(userEmail) {
     // Registered to-do list of logged user
     const dbResponse = localStorage.getItem(userEmail);

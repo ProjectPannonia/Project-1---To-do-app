@@ -45,6 +45,7 @@ function logMeIn(email, psw) {
         document.getElementById('logged_in').classList.add('main_box');
         document.getElementById('welcome_name').innerText = loggedInUser;
         document.getElementById('welcome_email').innerText = email;
+        loadSavedListsFromDb(loggedEmail.innerText);
     }
 }
 
