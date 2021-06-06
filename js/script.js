@@ -30,7 +30,9 @@ myListDivButtonsContainer.querySelectorAll('input').forEach(item => {
 
 /* Date picker */
 $( function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker({
+        minDate: 'today'
+    });
 });
 
 /* Import js file */
