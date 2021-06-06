@@ -13,13 +13,19 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
     });
 
     function topButtonsHandler(buttonText) {
-        
-        if(buttonText === 'Settings' || buttonText === 'My list') {
-            const tableContent = document.getElementById('my_list_div');
-            const settingsDiv = document.getElementById('account_settings');
-            
-            showAndHide(tableContent, settingsDiv);
-        } else if(buttonText === 'Log out'){
+        const tableContent = document.getElementById('my_list_div');
+        const settingsDiv = document.getElementById('account_settings')
+        if(buttonText === 'Settings') {
+            tableContent.classList.add('hide');
+            settingsDiv.classList.remove('hide');
+            settingsDiv.querySelector('form').style.display = 'flex';
+            settingsDiv.querySelector('h2').style.display = 'inline';
+        } else if(buttonText === 'My list') {
+            tableContent.classList.remove('hide');
+            settingsDiv.classList.add('hide');
+            settingsDiv.querySelector('form').style.display = 'none';
+            settingsDiv.querySelector('h2').style.display = 'none';
+        } else {
             const loggedinpage = document.getElementById('logged_in');
             const signupAndLogin = document.getElementById('sign_log_in');
             const login = document.getElementById('log_in');
@@ -27,15 +33,7 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
             loggedinpage.classList.remove('main_box');
             loggedinpage.classList.add('hide');
             signupAndLogin.classList.remove('hide');
-            
         }
-        
-    }
-    function showAndHide(...elements) {
-        elements.forEach(arg => {
-            arg.classList.toggle('hide');
-            arg.classList.toggle('content');
-        });
     }
 });
 /* Import js file */
