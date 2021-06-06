@@ -48,3 +48,4 @@ include('js/userRegistration.js');
 include('js/userLoginHandler.js');
 include('js/existingListsHandler.js');
 include('js/userSettings.js');
+include('js/createToDoList.js');
