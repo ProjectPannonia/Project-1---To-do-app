@@ -48,7 +48,7 @@ registerUserBtn.addEventListener('click', () => {
         } else if(localStorage.getItem(inputArr[2]) !== null){
             alert('This email is already registered');
         } else if(document.getElementById('aggreTerms').checked){
-            if((inputArr[3]).length >= 8) {
+            if(passwordValidarot(inputArr[3])) {
                     /* validate email*/
                 if(validateEmail(inputArr[2])) {
                     // clear fields
@@ -64,8 +64,6 @@ registerUserBtn.addEventListener('click', () => {
                 } else {
                     alert('Invalid email address!');
                 }
-            } else {
-                alert('Short password - minimum 8 characters');
             }
 
         } else {
@@ -127,5 +125,22 @@ fieldElements.forEach(field => {
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+}
+function passwordValidarot(password) {
+    const strongPassword = passwordStrengthValidator(password);
+    const enoughLength = password.length >= 8;
+
+    if(!strongPassword) {
+        alert('Weak password!');
+    } else if(!enoughLength) {
+        alert('Short password!');
+    }
+    console.log('Password weak: ' + strongPassword);
+    console.log('Password short: ' + enoughLength);
+    return strongPassword && enoughLength;
+}
+function passwordStrengthValidator(password) {
+    const re = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/;
+    return re.test(password);
 }
 
