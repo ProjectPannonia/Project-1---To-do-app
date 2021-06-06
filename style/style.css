@@ -405,4 +405,9 @@
     background-color: darkseagreen;
     color: greenyellow;
     border: none;
+    margin-right: 5px;
+}
+#my_list_div_menu form input:hover {
+    background-color: wheat;
+    color: red;
 }
