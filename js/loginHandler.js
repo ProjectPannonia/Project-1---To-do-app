@@ -13,6 +13,7 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
     });
 
     function topButtonsHandler(buttonText) {
+        
         if(buttonText === 'Settings' || buttonText === 'My list') {
             const tableContent = document.getElementById('my_list_div');
             const settingsDiv = document.getElementById('account_settings');
@@ -28,6 +29,7 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
             signupAndLogin.classList.remove('hide');
             
         }
+        
     }
     function showAndHide(...elements) {
         elements.forEach(arg => {

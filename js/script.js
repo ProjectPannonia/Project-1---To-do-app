@@ -41,13 +41,10 @@ function include(file) {
     script.defer = true;
     document.getElementsByTagName('body').item(0).appendChild(script);
 }
-//export {Account, ToDoList, Activity};
 
-//include('js/loggedInController.js');
 include('js/loginHandler.js');
 include('js/loginAndSignupHandler.js');
 include('js/userRegistration.js');
 include('js/userLoginHandler.js');
-//include('js/createNewListHandler.js');
 include('js/existingListsHandler.js');
 include('js/userSettings.js');

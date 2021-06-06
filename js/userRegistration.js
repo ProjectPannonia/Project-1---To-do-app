@@ -254,5 +254,19 @@ document.getElementById('save_created_list').addEventListener('click', () => {
     }
     function sendToLocalstorage(loggedEmail,parsedUserData) {
         localStorage.setItem(loggedEmail, JSON.stringify(parsedUserData));
+        setFieldsToDefault();
+    }
+    function setFieldsToDefault() {
+        document.getElementById('create_new_list').querySelector('p').innerText = 'Unnamed list';
+        tbody.innerHTML = '';
+        document.getElementById('new_list_name_label').classList.remove('hide');
+        document.getElementById('new_list_name').classList.remove('hide');
+        document.getElementById('activity_name_label').classList.add('hide');
+        document.getElementById('activity_name').classList.add('hide');
+        document.getElementById('datepicker_label').classList.add('hide');
+        document.getElementById('datepicker').classList.add('hide');
+        document.getElementById('add_activity_btn').classList.add('hide');
+        document.getElementById('save_list_name').classList.remove('hide');
+        alert('List saved');
     }
 });
