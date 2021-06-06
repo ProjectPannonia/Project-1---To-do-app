@@ -48,23 +48,26 @@ registerUserBtn.addEventListener('click', () => {
         } else if(localStorage.getItem(inputArr[2]) !== null){
             alert('This email is already registered');
         } else if(document.getElementById('aggreTerms').checked){
-            /* validate email*/
-            const emailIsValid = validateEmail(inputArr[2]);
-            if(emailIsValid) {
-                // clear fields
-             clearFields(fieldElements);
-             // create account object
-             const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
-             // send to local storage
-             localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
-             
-             document.getElementById('sign_up').classList.add('hide');
-             document.getElementById('sign_up').classList.remove('main_box');
-             document.getElementById('sign_log_in').classList.remove('hide');
+            if((inputArr[3]).length >= 8) {
+                    /* validate email*/
+                if(validateEmail(inputArr[2])) {
+                    // clear fields
+                clearFields(fieldElements);
+                // create account object
+                const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
+                // send to local storage
+                localStorage.setItem(inputArr[2], JSON.stringify(newAccount));
+                
+                document.getElementById('sign_up').classList.add('hide');
+                document.getElementById('sign_up').classList.remove('main_box');
+                document.getElementById('sign_log_in').classList.remove('hide');
+                } else {
+                    alert('Invalid email address!');
+                }
             } else {
-                alert('Invalid email address!');
+                alert('Short password - minimum 8 characters');
             }
-             
+
         } else {
             alert('Please accept the therms!');
         }
