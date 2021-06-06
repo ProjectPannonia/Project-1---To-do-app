@@ -48,7 +48,10 @@ registerUserBtn.addEventListener('click', () => {
         } else if(localStorage.getItem(inputArr[2]) !== null){
             alert('This email is already registered');
         } else if(document.getElementById('aggreTerms').checked){
-             // clear fields
+            /* validate email*/
+            const emailIsValid = validateEmail(inputArr[2]);
+            if(emailIsValid) {
+                // clear fields
              clearFields(fieldElements);
              // create account object
              const newAccount = new Account(inputArr[0], inputArr[1], inputArr[2], inputArr[3]);
@@ -58,6 +61,10 @@ registerUserBtn.addEventListener('click', () => {
              document.getElementById('sign_up').classList.add('hide');
              document.getElementById('sign_up').classList.remove('main_box');
              document.getElementById('sign_log_in').classList.remove('hide');
+            } else {
+                alert('Invalid email address!');
+            }
+             
         } else {
             alert('Please accept the therms!');
         }
@@ -114,4 +121,8 @@ fieldElements.forEach(field => {
         field.classList.remove('invalidData');
     })
 });
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 

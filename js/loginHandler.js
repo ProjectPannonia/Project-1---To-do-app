@@ -28,7 +28,6 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
         } else {
             const loggedinpage = document.getElementById('logged_in');
             const signupAndLogin = document.getElementById('sign_log_in');
-            const login = document.getElementById('log_in');
 
             loggedinpage.classList.remove('main_box');
             loggedinpage.classList.add('hide');
@@ -36,11 +35,3 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
         }
     }
 });
-/* Import js file */
-function include(file) {
-    var script = document.createElement('script');
-    script.src = file;
-    script.type = 'text/javascript';
-    script.defer = true;
-    document.getElementsByTagName('body').item(0).appendChild(script);
-}
