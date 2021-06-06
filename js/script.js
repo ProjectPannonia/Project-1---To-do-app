@@ -1,27 +1,4 @@
-/*
-class Account {
-    constructor(firstName, lastName, email, password){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.lists = []; // contains ToDoList objects
-    }
-}
-class ToDoList {
-    constructor(listName,listElements) {
-        this.listName = listName;
-        this.listElements = listElements; // contains activity objects
-    }
-}
-class Activity {
-    constructor(activityName, timeStamp,deadline) {
-        this.activityName = activityName;
-        this.timeStamp = timeStamp;
-        this.deadline = deadline;
-    }
-}
-*/
+
 /*
     Existing lists and create new buttons handlers
 */
@@ -66,10 +43,11 @@ function include(file) {
 }
 //export {Account, ToDoList, Activity};
 
-include('js/loggedInController.js');
+//include('js/loggedInController.js');
 include('js/loginHandler.js');
 include('js/loginAndSignupHandler.js');
 include('js/userRegistration.js');
 include('js/userLoginHandler.js');
 //include('js/createNewListHandler.js');
 include('js/existingListsHandler.js');
+include('js/userSettings.js');

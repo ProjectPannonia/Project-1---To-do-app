@@ -226,7 +226,6 @@ document.getElementById('save_created_list').addEventListener('click', () => {
     const table = document.getElementById('new_list_Table');
     const tbody = table.querySelector('tbody');
     const tableRows = tbody.childNodes;
-    //const listName = document.getElementById('create_new_list').querySelector('p').innerText;
 
     createActivities(tableRows,listName);
 
@@ -241,7 +240,6 @@ document.getElementById('save_created_list').addEventListener('click', () => {
             let deadLine = rowNodes[2].innerText;
     
             activityObjArr.push(new Activity(activityName, timeStamp, deadLine));
-            console.log('NAme: ' + rowNodes[0].innerText + ", time: " + rowNodes[1].innerText);
         }
     
         const toDoList = new ToDoList(listName, activityObjArr);

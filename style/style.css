@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&display=swap');
 *{
     box-sizing: border-box;
 }
@@ -59,9 +60,6 @@
     display: flex;
     margin: 15vh auto;
     flex-direction: column;
-    height: 65vh;
-    width: 35vw;
-    /*! border-radius: 4%; */
     background-color: rgba(250, 250, 35, 0.3);
     color: white;
     border-top-left-radius: 2%;
@@ -71,7 +69,6 @@
 }
 .main_box h2 {
     text-align: center;
-    background: rgba(250, 250, 35, 0.6);
 }
 #sign_up form {
     display: flex;
@@ -148,8 +145,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgba(250, 250, 35, 0.6);
+    background-color: rgba(255,162,41,.89);
     padding: 10px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
 }
 .top_menu h2 {
     display: block;
@@ -170,7 +169,11 @@
     background-color: rgba(250, 250, 35, 0.2);
 }
 .my_list_box h2 {
-    margin: 0;
+    /*! margin: 0 10px 0 10; */
+    background-color: rgba(255,162,41,.89);
+    display: block;
+    width: 67vw;
+    margin: 10px 30px 0 30px;
 }
 .my_list_box ul li {
     width: 50vw;
@@ -232,9 +235,12 @@
 }
 .footer {
     
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    background-color: rgba(255,162,41,.89);
 }
 .footer h2 {
-    margin: 20px 0px 0px 0px;
+    margin: 10px 0px 7px;
 }
 #create_new_list p {
     
@@ -275,7 +281,7 @@
 .list_box {
     width: 68vw;
     height: 8vh;
-    background-color: blueviolet;
+    background-color: rgba(250, 250, 35, 0.6);
     margin:1vh;
 }
 .list_box h2 {
@@ -283,19 +289,19 @@
     height: 8vh;
     padding-top: 2vh;
 }
-.list_box:hover {
-    background-color: red;
+.list_box h2:hover {
+    background-color: rgba(251, 251, 35, 0.94);
     cursor: pointer;
+    color: orange;
 }
 .tableContainer {
     width: 68vw;
     height: 100px;
-    background-color: aqua;
     margin-top: 1vh;
+    border: 1px solid aliceblue;
 }
 .tableContainer :first-child{
     
-    background-color: red;
     height: 2vh;
 }
 .tableContainer :first-child th {
@@ -303,4 +309,76 @@
 }
 .active_list_box {
     height: auto;
+}
+#account_settings {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#settings_form {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    margin: 0 auto;
+}
+#settings_form input {
+    height: 5vh;
+    font-size: 1.3em;
+}
+.tableContainer thead {
+    background-color: gold;
+    color: brown;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: 'Teko', sans-serif;
+}
+.tableContainer tbody {
+    background-color: cadetblue;
+    font-size: 1.2em;
+    text-align: center;
+}
+.tableContainer tbody td {
+    padding: 1vh;
+}
+.top_menu form input{
+   padding: 3px 14px 3px 14px;
+    color: greenyellow;
+    font-size: 1.1em;
+    background: darkseagreen;
+    border-radius: 55px;
+}
+.top_menu form input:hover {
+    color: red;
+}
+#settings_form input {
+    border-radius: 19px;
+    color: gray;
+    text-align: center;
+}
+#settings_form input:last-child {
+    width: 10vw;
+    margin:30px auto;
+    background-color: darkseagreen;
+    color: rgba(250, 250, 35, 0.3);
+}
+#settings_form input:last-child:hover {
+    background-color: rgba(255,162,41,.89);
+    color: white;
+}
+.footer a {
+    text-decoration: none;
+}
+#create_new_list form input {
+    border-radius: 10px;
+    height: 3vh;
+    margin: 0 10px 0 10px;
+}
+#create_new_list form label {
+    font-size: 1.3em
+}
+#my_list_div form input {
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    font-size: 1em;
 }

@@ -9,7 +9,6 @@ existingListsBtn.addEventListener('click', () => {
     loadSavedListsFromDb(loggedEmail.innerText);
 });
 function loadSavedListsFromDb(userEmail) {
-    console.log('User email: ' + userEmail);
     // Registered to-do list of logged user
     const dbResponse = localStorage.getItem(userEmail);
     const parsed = JSON.parse(dbResponse);
@@ -158,7 +157,6 @@ function createEditButton() {
 
 function getForm() {
     const form = document.createElement('form');
-    //form.classList.add('hide');
     const addBtn = createFormButton('Add');
     const saveBtn = createFormButton('Save');
     
@@ -182,22 +180,52 @@ function getFormButtonFunction(value,event) {
     let func;
     const target = event.target;
     const table = (((target.parentElement).parentElement).querySelector('table')).querySelector('tbody');
-
+    
     if(value === 'Add') {
         func = () => {
+            
             const activityName = prompt('Activity name: ');
             const fullDate = new Date();
             const timestamp = fullDate.getUTCDay() + "/" + fullDate.getUTCMonth() + "/" + fullDate.getUTCFullYear();
             const deadline = prompt('Enter deadline(day/month/year)','Undefined');
             const row = getActivityRow(activityName,timestamp,deadline,createEditButton());
             table.appendChild(row);
-            console.log(table.innerHTML);
         }
     } else {
         func = () => {
-            
+            const listName = ((table.parentElement).parentElement).querySelector('h2').innerText;
+            const rows = table.childNodes;
+            const activitiesArr = [];
+            rows.forEach(row => {
+                const columns = row.childNodes;
+                const name = columns[0].innerText;
+                const timestamp = columns[1].innerText;
+                const deadline = columns[2].innerText;
+                activitiesArr.push(new Activity(name,timestamp,deadline));
+            });
+            const updatedToDo = new ToDoList(listName,activitiesArr);
+            updateToDoLists(updatedToDo);
         }
     }
 
     return func();
+}
+function updateToDoLists(updatedToDo) {
+    const account = JSON.parse(localStorage.getItem(loggedEmail.innerText));
+    const todoLists = account.lists;
+    console.log(todoLists);
+    const updatedListName = updatedToDo.listName;
+    let index = 0;
+    let indexToRemove;
+    todoLists.forEach(list => {
+        const oldListName = list.listName;
+        
+        if(oldListName === updatedListName) {
+            indexToRemove = index;
+        }
+        index++;
+    });
+    account.lists.splice(indexToRemove,1);
+    account.lists.push(updatedToDo);
+    localStorage.setItem(loggedEmail.innerText,JSON.stringify(account));
 }

@@ -19,13 +19,18 @@ topMenuDiv.querySelectorAll('input').forEach(item => {
             
             showAndHide(tableContent, settingsDiv);
         } else if(buttonText === 'Log out'){
+            const loggedinpage = document.getElementById('logged_in');
+            const signupAndLogin = document.getElementById('sign_log_in');
+            const login = document.getElementById('log_in');
+
+            loggedinpage.classList.remove('main_box');
+            loggedinpage.classList.add('hide');
+            signupAndLogin.classList.remove('hide');
             
         }
     }
     function showAndHide(...elements) {
-        console.log(elements);
         elements.forEach(arg => {
-            console.log('switch');
             arg.classList.toggle('hide');
             arg.classList.toggle('content');
         });
