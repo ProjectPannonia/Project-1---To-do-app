@@ -112,6 +112,8 @@
     flex-direction: column;
     padding: 3vh;
     margin-top: 0vh;
+    color: dimgrey;
+    font-size: 1.2em;
 }
 #log_in form input {
     height: 5vh;
@@ -139,6 +141,7 @@
     text-align: center;
     background-color:rgba(250, 250, 35, 0.7);
     border-radius: 5px;
+    font-size: 1.3em;
 }
 
 .top_menu {
@@ -411,3 +414,5 @@
     background-color: wheat;
     color: red;
 }
+
+  

@@ -64,3 +64,4 @@ function getLoggedInUserObj() {
 
     return userObject = JSON.parse(localStorage.getItem(loggedInEmail));
 }
+
