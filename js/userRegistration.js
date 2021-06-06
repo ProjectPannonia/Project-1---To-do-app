@@ -140,7 +140,7 @@ function passwordValidarot(password) {
     return strongPassword && enoughLength;
 }
 function passwordStrengthValidator(password) {
-    const re = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/;
+    const re = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
     return re.test(password);
 }
 
