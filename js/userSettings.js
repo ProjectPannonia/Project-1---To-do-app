@@ -10,7 +10,7 @@ const password = settingsFormFields[3];
 const passwordRep = settingsFormFields[4];
 const modifyButton = settingsFormFields[5];
 
-settingsBtn.addEventListener('click', (event) => {
+settingsBtn.addEventListener('click', () => {
     getUserData();
 });
 
@@ -30,8 +30,13 @@ function getAccountDataFromDb() {
 modifyButton.addEventListener('click', () => {
     const fieldsValid = fieldsNotEmpty();
     if(fieldsValid) {
-        const originalAccount = getAccountDataFromDb();
-        updateAndSave(originalAccount);
+        if(password.value === passwordRep.value) {
+            const originalAccount = getAccountDataFromDb();
+            updateAndSave(originalAccount);
+        } else {
+            alert('Difference between password fields!');
+        }
+        
     } else {
         alert('Field or fields is/are empty.');
     }
