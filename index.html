@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <title>Document</title>
+    <title>To-do manager</title>
 </head>
 <body>
     <div id="wrapper">
