@@ -488,7 +488,7 @@
         width: 100vw;
         height: 100vh;
         margin:0;
-        padding: 3vh;
+        padding: 0;
     }
     #sign_log_in {
         width: 88vw;
@@ -518,4 +518,71 @@
     #sign_log_in form input {
         width: 80vw;
         height: 15vh;
+    }
+    #log_in {
+        width: 88vw;
+        height: 70vh;
+        margin-top: 9vh;
+        margin-bottom: 0;
+    }
+    .main_box h2 {
+        font-size: 2em;
+        
+    }
+    #log_in form label {
+        width: 82vw;
+        height: 7vh;
+        font-size: 1.8em;
+        margin-bottom: 4vh;
+    }
+    #log_in form {
+        margin: 0 auto;
+        padding: 0;
+    }
+    #log_in form input {
+        width: 80vw;
+        height: 8vh;
+        font-size: 1.3em;
+        
+    }
+    #logged_in {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+    .top_menu {
+        flex-direction: column;
+        font-size: 1.1em;
+        border-radius: 0;
+    }
+    .top_menu h2 {
+        display: flex;
+        flex-direction: column;
+    }
+    .top_menu form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0;
+    }
+    .top_menu form input {
+        width: 31vw;
+        height: 5vh;
+        border-radius: 0;
+    }
+    #my_list_div form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100vw;
+    }
+    #my_list_div form input {
+        width: 47vw;
+        border-radius: 0;
+    }
+    .main_box h2 {
+        width: 100vw;
+        margin-left: 0;
     }
