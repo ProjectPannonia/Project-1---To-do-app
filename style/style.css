@@ -467,3 +467,55 @@
         height: auto;
     }
 }
+@media screen and (max-width: 1024px) {
+    #sign_log_in {
+        width: 50vw;
+        height: 40vh;
+    }
+    #log_in {
+        width: 50vw;
+        height: 45vh;
+    }
+}
+@media screen and (max-width: 360px) {
+    body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding-top: 0;
+    }
+    #wrapper {
+        width: 100vw;
+        height: 100vh;
+        margin:0;
+        padding: 3vh;
+    }
+    #sign_log_in {
+        width: 88vw;
+        height: 85vh;
+        margin: 5vh auto;
+        border-radius: 0;
+    }
+    #sign_log_in h2 {
+        width: 85vw;
+        display: block;
+        margin: 3vh auto;
+        font-size: 2em;
+        border-radius: 5%;
+    }
+    #sign_log_in form {
+        margin: 0 auto;
+        padding-left: 1vh;
+        
+    }
+    #sign_log_in form label {
+        height: 7vh;
+        width: 85vw;
+        border-radius: 0;
+        font-size: 1.8em;
+        margin-bottom: 7vh;
+    }
+    #sign_log_in form input {
+        width: 80vw;
+        height: 15vh;
+    }
